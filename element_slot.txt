@@ -1,0 +1,37 @@
+waltz jump
+half loop
+half flip
+half lutz
+salchow
+toeloop
+loop
+flip
+lutz
+axel
+walley
+double salchow
+double toeloop
+double loop
+double flip
+double lutz
+double axel
+triple salchow
+triple toeloop
+triple loop
+triple flip
+triple lutz
+triple axel
+combination jump
+combo jump
+spin
+scratch spin
+sit spin
+camel spin
+layback spin
+combo spin
+combination spin
+change foot spin
+flying spin
+step sequence
+spiral
+spiral sequence

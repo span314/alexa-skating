@@ -1,0 +1,26 @@
+RunThroughProgramIntent run program for {skater}
+RunThroughProgramIntent run {variant} for {skater}
+RunThroughProgramIntent run {variant} program for {skater}
+RunThroughProgramIntent run through program for {skater}
+RunThroughProgramIntent run through {variant} for {skater}
+RunThroughProgramIntent run through {variant} program for {skater}
+PlayProgramIntent play program for {skater}
+PlayProgramIntent play {variant} for {skater}
+PlayProgramIntent play {variant} program for {skater}
+PlayProgramIntent play music for {skater}
+PlayProgramIntent play program for {skater} from {element}
+PlayProgramIntent play {variant} for {skater} from {element}
+PlayProgramIntent play {variant} program for {skater} from {element}
+PlayProgramIntent play music for {skater} from {element}
+PlayProgramIntent play program for {skater} from my {element}
+PlayProgramIntent play {variant} for {skater} from my {element}
+PlayProgramIntent play {variant} program for {skater} from my {element}
+PlayProgramIntent play music for {skater} from my {element}
+PlayProgramIntent play program for {skater} from a {element}
+PlayProgramIntent play {variant} for {skater} from a {element}
+PlayProgramIntent play {variant} program for {skater} from a {element}
+PlayProgramIntent play music for {skater} from a {element}
+PlayProgramIntent play program for {skater} from the {element}
+PlayProgramIntent play {variant} for {skater} from the {element}
+PlayProgramIntent play {variant} program for {skater} from the {element}
+PlayProgramIntent play music for {skater} from the {element}

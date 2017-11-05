@@ -1,0 +1,7 @@
+long
+short
+free
+show
+dance
+pairs
+cat

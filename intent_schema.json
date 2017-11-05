@@ -1,0 +1,58 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "skater",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+        {
+          "name": "variant",
+          "type": "VARIANT"
+        },
+        {
+          "name": "element",
+          "type": "ELEMENT"
+        }
+      ],
+      "intent": "PlayProgramIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "skater",
+          "type": "AMAZON.US_FIRST_NAME"
+        },
+        {
+          "name": "variant",
+          "type": "VARIANT"
+        }
+      ],
+      "intent": "RunThroughProgramIntent"
+    },
+    {
+      "intent": "AMAZON.PauseIntent"
+    },
+    {
+      "intent": "AMAZON.ResumeIntent"
+    },
+    {
+      "intent": "AMAZON.NextIntent"
+    },
+    {
+      "intent": "AMAZON.PreviousIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.StartOverIntent"
+    }
+  ]
+}
