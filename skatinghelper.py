@@ -6,6 +6,69 @@ import os
 APP_ID = os.environ.get("APP_ID") #e.g. amzn1.ask.skill.00000000-0000-0000-0000-000000000000
 MUSIC_URL_PREFIX = os.environ.get("MUSIC_URL_PREFIX") #e.g. https://www.example.com/music/
 
+################
+### Mappings ###
+################
+
+# map of soundex(skater) to program definitions
+# TODO move this data to dynamodb
+SKATER_DATA = {
+    "s5": {
+        "name": "shawn",
+        "default": "free",
+        "programs": {
+            "free": {
+                "music": "shawn_pan_free.mp3"
+            }
+        }
+    },
+    "f46": {
+        "name": "flora",
+        "default": "long",
+        "programs": {
+            "long": {
+                "music": "flora_su_free.mp3"
+            },
+            "short": {
+                "music": "flora_su_short.mp3"
+            }
+        }
+    },
+    "d5": {
+        "name": "diane",
+        "default": "long",
+        "programs": {
+            "long": {
+                "music": "diane_zhou_free.mp3"
+            },
+            "short": {
+                "music": "diane_zhou_short.mp3"
+            }
+        }
+    },
+    "s6": {
+        "name": "sarah",
+        "default": "free",
+        "programs": {
+            "free": {
+                "music": "sarah_don_free.mp3"
+            }
+        }
+    },
+    "k4": {
+        "name": "kylie",
+        "default": "short",
+        "programs": {
+            "short": {
+                "music": "kylie_ying_short.mp3"
+            },
+            "show": {
+                "music": "kylie_ying_show.mp3"
+            }
+        }
+    }
+}
+
 ########################
 ### Play Music Logic ###
 ########################
@@ -14,28 +77,25 @@ def play_program(skater, variant, element, delay):
     print "variant: " + variant
     print "element: " + element
 
-    if skater == "sean":
-        if element.startswith("step"):
-            return response_play_music("shawn_pan_free.mp3", offset=43000, message="playing from your step sequence")
-        else:
-            return response_play_music("shawn_pan_free.mp3", delay=delay)
+    if variant == "cat":
+        return response_say("<speak><say-as interpret-as='interjection'>meow</say-as></speak>")
 
-    elif skater == "flora":
-        if variant == "short":
-            return response_say("Sorry Flora, I don't have music for your short.")
-        elif variant == "cat":
-            return response_say("<speak><say-as interpret-as='interjection'>meow</say-as></speak>")
-        else:
-            return response_play_music("flora_su_free.mp3", delay=delay)
+    skater_data = SKATER_DATA.get(soundex(skater))
+    if not skater_data:
+        return response_say("Sorry, I can't find the skater " + skater)
 
-    elif skater in ["diane", "dyan"]:
-        if variant == "short":
-            return response_play_music("diane_zhou_short.mp3", delay=delay)
-        else:
-            return response_play_music("diane_zhou_free.mp3", delay=delay)
+    if not variant:
+        variant = skater_data["default"]
+    program = skater_data["programs"].get(variant)
 
-    else:
+    if not program:
         return response_say("Sorry, I can't find " + variant + " program for " + skater)
+
+    # TODO figure out nice way to handle element bookmarks
+    if skater_data["name"] == "shawn" and element.startswith("step"):
+        return response_play_music("shawn_pan_free.mp3", offset=44000, message="playing from your step sequence")
+
+    return response_play_music(program["music"], delay=delay)
 
 #################
 ### Responses ###
@@ -148,3 +208,33 @@ def lambda_handler(event, context):
     else:
         print "Ignoring request of type: " + request_type
         return response_blank()
+
+#########################
+### Utility Functions ###
+#########################
+
+# Creates fingerprint of a lowercase word such that similiar sounds map to the same value.
+# Variation of the soundex algorthm (not truncated or padded to 3 digits).
+# https://en.wikipedia.org/wiki/Soundex
+SOUNDEX_MAPPING = {
+  "b": "1", "f": "1", "p": "1", "v": "1",
+  "c": "2", "g": "2", "j": "2", "k": "2", "q": "2", "s": "2", "x": "2", "z": "2",
+  "d": "3", "t": "3",
+  "l": "4",
+  "m": "5", "n": "5",
+  "r": "6"
+}
+
+def soundex(word):
+  result = ""
+  last = None
+  for i, letter in enumerate(word):
+    if i == 0:
+      result += letter
+      last = SOUNDEX_MAPPING.get(letter, "")
+    else:
+      current = SOUNDEX_MAPPING.get(letter, "")
+      if current != last and letter != "h" and letter != "w":
+        result += current
+        last = current
+  return result
