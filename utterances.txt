@@ -24,3 +24,9 @@ PlayProgramIntent play program for {skater} from the {element}
 PlayProgramIntent play {variant} for {skater} from the {element}
 PlayProgramIntent play {variant} program for {skater} from the {element}
 PlayProgramIntent play music for {skater} from the {element}
+PlayDanceIntent play dance {dance}
+PlayDanceIntent play dance music {dance}
+PlayDanceIntent play ice dance {dance}
+PlayDanceIntent play ice dance music {dance}
+PlayDanceIntent play {dance} ice dances
+PlayDanceIntent play {dance} playlist

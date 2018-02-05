@@ -69,6 +69,9 @@ SKATER_DATA = {
     }
 }
 
+dance_levels = ["Preliminary", "Pre-Bronze", "Bronze", "Pre-Silver", "Silver", 
+                "Pre-Gold", "Gold", "International"]
+
 ########################
 ### Play Music Logic ###
 ########################
@@ -96,6 +99,14 @@ def play_program(skater, variant, element, delay):
         return response_play_music("shawn_pan_free.mp3", offset=44000, message="playing from your step sequence")
 
     return response_play_music(program["music"], delay=delay)
+
+def play_dance(dance):
+    if dance in dance_levels:
+        break
+        # play entire level playlist, in some order?
+    else:
+        break
+        # check some mapping of dance names/abbreviations to pronunciations?
 
 #################
 ### Responses ###
@@ -193,6 +204,9 @@ def lambda_handler(event, context):
             skater = intent.get("slots", {}).get("skater", {}).get("value", "").lower()
             variant = intent.get("slots", {}).get("variant", {}).get("value", "").lower()
             return play_program(skater, variant, "", True)
+        elif intent_name == "PlayDanceIntent":
+            dance = intent.get("slots", {}).get("dance", {}).get("value", "").lower()
+            return play_dance(dance)
         elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent" or intent_name == "AMAZON.PauseIntent":
             return response_stop_music() # TODO persist track info and location on pause
         elif intent_name == "AMAZON.ResumeIntent":
@@ -238,3 +252,5 @@ def soundex(word):
         result += current
         last = current
   return result
+
+
