@@ -31,6 +31,15 @@
       "intent": "RunThroughProgramIntent"
     },
     {
+      "slots": [
+        {
+          "name": "dance",
+          "type": "DANCE"
+        }
+      ],
+      "intent": "PlayDanceIntent"
+    },
+    {
       "intent": "AMAZON.PauseIntent"
     },
     {
